@@ -3,10 +3,6 @@ import { useMutation } from "react-query";
 import { Wrapper, FormBox, Heading, FormInput, FormButton } from "./App.styles";
 import EvaLogo from "./assets/eva-logo.png";
 function App() {
-  const [firstName, setFirstName] = useState<string>("");
-  const [lastName, setLastName] = useState<string>("");
-  const [age, setAge] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
   const [userID, setUserID] = useState<string>("");
 
   const [user, setUser] = useState<User>({
@@ -47,16 +43,8 @@ function App() {
     },
   });
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    const user = {
-      firstName,
-      lastName,
-      age,
-      email,
-    };
-
     mutation.mutate(user);
   };
 
@@ -69,10 +57,12 @@ function App() {
   };
 
   const resetForm = () => {
-    setFirstName("");
-    setLastName("");
-    setAge("");
-    setEmail("");
+    setUser({
+      firstName: "",
+      lastName: "",
+      age: "",
+      email: "",
+    });
   };
 
   return (
